@@ -2,15 +2,13 @@
 
 namespace App\Admin\Controller;
 
-use App\Admin\Validate\UserValidate;
-use App\Model\User;
-//use support\Cache;
 use App\Service\Mailer;
-use Shopwwi\LaravelCache\Cache;
-use support\Db;
-//use support\Redis;
 use support\Request;
 use Webman\RedisQueue\Redis;
+
+//use support\Cache;
+
+//use support\Redis;
 
 class IndexController
 {
