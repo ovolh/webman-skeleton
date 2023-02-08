@@ -1,11 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Phinx\Migration\AbstractMigration;
 
-final class CreateUsersTable extends AbstractMigration
+final class CreateAdminUsersTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -20,7 +18,7 @@ final class CreateUsersTable extends AbstractMigration
      */
     public function change(): void
     {
-        $users = $this->table('users');
+        $users = $this->table('admin_users');
         $users->addColumn('username', 'string', ['limit' => 20, 'default' => '', 'comment' => '用户名'])
             ->addColumn('password', 'string', ['limit' => 40, 'default' => '', 'comment' => '密码'])
             ->addColumn('email', 'string', ['limit' => 100, 'default' => '', 'comment' => '邮箱'])

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\command;
+namespace App\Command;
 
 use Shopwwi\WebmanAuth\Facade\Str;
 use Symfony\Component\Console\Command\Command;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class ShopwwiAuthCommand extends Command
+class AuthCommand extends Command
 {
     protected static $defaultName = 'shopwwi:auth';
     protected static $defaultDescription = 'shopwwi auth';
