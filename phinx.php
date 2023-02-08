@@ -3,7 +3,7 @@
 return [
     "paths" => [
         "migrations" => "database/migrations",
-        "seeds" => "database/seeds"
+        "seeds" => "database/seeders"
     ],
     "environments" => [
         "default_migration_table" => "migrations",

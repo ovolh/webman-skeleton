@@ -24,12 +24,17 @@ cp .env.example .env
 
 4. 修改 .env 中环境变量
 
-- 执行数据迁移
+5. 执行数据迁移
 ```bash
 php vendor/bin/phinx migrate
+php vendor/bin/phinx seed:run
 ```
-
-5. 启动
+6. 生成JWT密钥(命令行)
+```bash
+php webman shopwwi:auth
+```
+   
+7. 启动
     - 调试模式 `php webman start`
     - 正式环境 `php webman start -d`
 

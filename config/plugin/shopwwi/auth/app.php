@@ -18,21 +18,27 @@
      'guard' => [
          'user' => [
              'key' => 'id',
-             'field' => ['id','name','email','mobile'], //设置允许写入扩展中的字段
-             'num' => 0, //-1为不限制终端数量 0为只支持一个终端在线 大于0为同一账号同终端支持数量 建议设置为1 则同一账号同终端在线1个
-             'model'=> app\model\Test::class
+             'field' => ['id','username','email'], //设置允许写入扩展中的字段
+             'num' => 1, //-1为不限制终端数量 0为只支持一个终端在线 大于0为同一账号同终端支持数量 建议设置为1 则同一账号同终端在线1个
+             'model'=> App\Model\User::class
+         ],
+         'admin' => [
+             'key' => 'id',
+             'field' => ['id','username','email'], //设置允许写入扩展中的字段
+             'num' => -1, //-1为不限制终端数量 0为只支持一个终端在线 大于0为同一账号同终端支持数量 建议设置为1 则同一账号同终端在线1个
+             'model'=> App\Model\AdminUser::class
          ]
      ],
      'jwt' => [
-         'redis' => false,
+         'redis' => true,
          // 算法类型 ES256、HS256、HS384、HS512、RS256、RS384、RS512
          'algorithms' => 'HS256',
          // access令牌秘钥
-         'access_secret_key' => 'w5LgNx5luRRjmamZFSqz3cPHOp9KuQPExlvgi18DN4SdnSI9obcVEhiZVE0NIIC7',
+         'access_secret_key' => 'l0xh9Gdk9hha2klZcZj2U0qzNV5xFcKHRqzhaoDeOl8MlSJdLyIVJcCf6DGCIkVw',
          // access令牌过期时间，单位秒。默认 2 小时
          'access_exp' => 36000,
          // refresh令牌秘钥
-         'refresh_secret_key' => 'w5LgNx5luRRjmamZFSqz3cPHOp9KuQPExlvgi18DN4SdnSI9obcVEhiZVE0NIIC7',
+         'refresh_secret_key' => 'l0xh9Gdk9hha2klZcZj2U0qzNV5xFcKHRqzhaoDeOl8MlSJdLyIVJcCf6DGCIkVw',
          // refresh令牌过期时间，单位秒。默认 7 天
          'refresh_exp' => 72000,
          // 令牌签发者

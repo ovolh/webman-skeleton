@@ -22,7 +22,7 @@ final class CreateUsersTable extends AbstractMigration
     {
         $users = $this->table('users');
         $users->addColumn('username', 'string', ['limit' => 20, 'default' => '', 'comment' => '用户名'])
-            ->addColumn('password', 'string', ['limit' => 40, 'default' => '', 'comment' => '密码'])
+            ->addColumn('password', 'string', ['default' => '', 'comment' => '密码'])
             ->addColumn('email', 'string', ['limit' => 100, 'default' => '', 'comment' => '邮箱'])
             ->addColumn('created_at', 'timestamp')
             ->addColumn('updated_at', 'timestamp')
