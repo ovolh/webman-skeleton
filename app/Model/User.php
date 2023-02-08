@@ -1,17 +1,17 @@
 <?php
 
-namespace app\model;
+namespace App\Model;
 
 use support\Model;
 
-class Test extends Model
+class User extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'test';
+    protected $table = 'users';
 
     /**
      * The primary key associated with the table.
@@ -25,5 +25,5 @@ class Test extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 }
