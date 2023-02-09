@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9209860e063c99d563c0aad7e4a76ad",
+    "content-hash": "42dd7b76fb636b9743743f2b3ae97bfe",
     "packages": [
         {
             "name": "brick/math",
@@ -6514,12 +6514,65 @@
                 "source": "https://github.com/yzh52521/easyhttp/tree/v1.0.5"
             },
             "time": "2022-12-05T12:18:34+00:00"
+        },
+        {
+            "name": "yzh52521/webman-task",
+            "version": "dev-lv",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yzh52521/webman-task.git",
+                "reference": "1c87c96f8d3d646a7e9a0cf57cf21e0a24f37a64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yzh52521/webman-task/zipball/1c87c96f8d3d646a7e9a0cf57cf21e0a24f37a64",
+                "reference": "1c87c96f8d3d646a7e9a0cf57cf21e0a24f37a64",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.2.5"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.0",
+                "workerman/crontab": "^1.0",
+                "workerman/webman-framework": "^1.4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yzh52521\\Task\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yzh52521",
+                    "email": "396751927@qq.com"
+                }
+            ],
+            "description": " dynamic crontab task plugin for webman. ",
+            "keywords": [
+                "crontab",
+                "task",
+                "webman"
+            ],
+            "support": {
+                "issues": "https://github.com/yzh52521/webman-task/issues",
+                "source": "https://github.com/yzh52521/webman-task/tree/lv"
+            },
+            "time": "2023-02-08T07:13:14+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yzh52521/webman-task": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

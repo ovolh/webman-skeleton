@@ -13,6 +13,5 @@
  */
 
 return [
-//    '' => support\exception\Handler::class,
-    '' => \Tinywan\ExceptionHandler\Handler::class,
+    '' => support\exception\ApiHandler::class,
 ];

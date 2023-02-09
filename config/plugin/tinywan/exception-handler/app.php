@@ -1,5 +1,9 @@
 <?php
 
+use App\Util\ReturnCode;
+use Shopwwi\WebmanAuth\Exception\JwtTokenException;
+use taoser\exception\ValidateException;
+
 return [
     'enable' => true,
     // 错误异常配置
@@ -14,7 +18,9 @@ return [
             Tinywan\ExceptionHandler\Exception\TooManyRequestsHttpException::class,
             Tinywan\ExceptionHandler\Exception\ServerErrorHttpException::class,
             Tinywan\Validate\Exception\ValidateException::class,
-            Tinywan\Jwt\Exception\JwtTokenException::class
+            Tinywan\Jwt\Exception\JwtTokenException::class,
+            JwtTokenException::class,
+            ValidateException::class,
         ],
         // 自定义HTTP状态码
         'status' => [
@@ -26,9 +32,9 @@ return [
         ],
         // 自定义响应消息
         'body' => [
-            'code' => 0,
-            'msg' => '服务器内部异常',
-            'data' => null
+            'code' => ReturnCode::INVALID,
+            'message' => '服务器内部异常',
+            'data' => []
         ],
         // 事件，event 与 webman/event 存在冲突，event 重命名为 event_trigger
         'event_trigger' => [

@@ -29,9 +29,10 @@ cp .env.example .env
 php vendor/bin/phinx migrate
 php vendor/bin/phinx seed:run
 ```
-6. 生成JWT密钥(命令行)
+6. 生成JWT密钥(命令行)等
 ```bash
 php webman shopwwi:auth
+php webman key:generate
 ```
    
 7. 启动
@@ -58,7 +59,7 @@ php webman shopwwi:auth
 - Env 环境变量
 [vlucas/phpdotenv](https://www.workerman.net/doc/webman/components/env.html)
 - crontab定时任务
-[workerman/crontab](https://www.workerman.net/doc/webman/components/crontab.html)
+[yzh52521/webman-task](https://www.workerman.net/plugin/42)
 - 命令行
 [webman/console](https://www.workerman.net/doc/webman/plugin/console.html)
 - HTTP客户端

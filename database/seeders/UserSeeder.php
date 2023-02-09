@@ -18,14 +18,14 @@ class UserSeeder extends AbstractSeed
         $data = [];
         $data[] = [
             'username'      => 'webman',
-            'password'      => password_hash('123456', PASSWORD_DEFAULT),
+            'password'      => '$2y$07$3SSS4Kn97oPA6sEPC5rxxemmXe4e1n8dKLLu6XhVmxTHufSjJcEL2',
             'email'         => 'webman@webman.com',
             'created_at'       => date('Y-m-d H:i:s'),
             'updated_at'       => date('Y-m-d H:i:s'),
         ];
         $data[] = [
             'username'      => $faker->userName,
-            'password'      => password_hash('123456', PASSWORD_DEFAULT),
+            'password'      => '$2y$07$3SSS4Kn97oPA6sEPC5rxxemmXe4e1n8dKLLu6XhVmxTHufSjJcEL2',
             'email'         => $faker->email,
             'created_at'       => date('Y-m-d H:i:s'),
             'updated_at'       => date('Y-m-d H:i:s'),

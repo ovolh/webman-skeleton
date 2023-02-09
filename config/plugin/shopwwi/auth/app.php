@@ -14,7 +14,7 @@
  */
  return [
      'enable' => true,
-     'app_key' => 'base64:N721v3Gt2I58HH7oiU7a70PQ+i8ekPWRqwI+JSnM1wo=',
+     'app_key' => env('APP_KEY'),
      'guard' => [
          'user' => [
              'key' => 'id',

@@ -55,7 +55,8 @@
     "webman-tech/laravel-filesystem": "^3.0",
     "league/flysystem": "^3.12",
     "tinywan/exception-handler": "^1.1",
-    "fzaninotto/faker": "^1.5"
+    "fzaninotto/faker": "^1.5",
+    "yzh52521/webman-task": "dev-lv"
   },
   "suggest": {
     "ext-event": "For better performance. "
