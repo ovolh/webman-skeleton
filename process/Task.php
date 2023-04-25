@@ -16,10 +16,11 @@ class Task
 
     /**
      * 初始化
+     * @param $taskDir
      */
-    public function __construct()
+    public function __construct($taskDir = '')
     {
-        $this->taskDir= config('task.task_dir');
+        $this->taskDir= $taskDir;
     }
 
     /**

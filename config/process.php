@@ -41,6 +41,9 @@ return [
         ]
     ],
     'task'  => [
-        'handler'  => process\Task::class
+        'handler'  => process\Task::class,
+        'constructor' => [
+            'taskDir' => app_path() . '/Task'
+        ]
     ],
 ];

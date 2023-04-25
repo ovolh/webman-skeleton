@@ -41,7 +41,8 @@ class CrontabFrequencies
      */
     public function rule($rule)
     {
-        return $this->rule = $rule;
+        $this->rule = $rule;
+        return $this;
     }
 
     /**
