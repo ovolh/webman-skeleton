@@ -2,13 +2,17 @@
 
 namespace App\Admin\Controller;
 
-use support\Request;
+use App\Request;
+use App\Util\CrontabFrequencies;
+use support\Db;
 
 class IndexController
 {
-    public function index(Request $request): \support\Response
+    public function index(Request $request)
     {
-        return success_json();
+        $dd = new CrontabFrequencies();
+        Db::select();
+        return success($dd->everySecond());
     }
 
 }

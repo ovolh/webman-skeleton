@@ -1,8 +1,6 @@
 <?php
 
 use App\Util\ReturnCode;
-use Shopwwi\WebmanAuth\Exception\JwtTokenException;
-use taoser\exception\ValidateException;
 
 return [
     'enable' => true,
@@ -18,9 +16,8 @@ return [
             Tinywan\ExceptionHandler\Exception\TooManyRequestsHttpException::class,
             Tinywan\ExceptionHandler\Exception\ServerErrorHttpException::class,
             Tinywan\Validate\Exception\ValidateException::class,
-            Tinywan\Jwt\Exception\JwtTokenException::class,
-            JwtTokenException::class,
-            ValidateException::class,
+//            Tinywan\Jwt\Exception\JwtTokenException::class,
+            Shopwwi\WebmanAuth\Exception\JwtTokenException::class
         ],
         // 自定义HTTP状态码
         'status' => [

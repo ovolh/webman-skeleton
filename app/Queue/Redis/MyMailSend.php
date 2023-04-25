@@ -17,6 +17,7 @@ class MyMailSend implements Consumer
     {
 
         // 无需反序列化
+        var_export(1); // 输出 ['to' => 'tom@gmail.com', 'content' => 'hello']
         var_export($data); // 输出 ['to' => 'tom@gmail.com', 'content' => 'hello']
     }
 }

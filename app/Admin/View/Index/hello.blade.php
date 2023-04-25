@@ -9,6 +9,6 @@
 
 </head>
 <body>
-hello {{$name}}, {{$ye}}
+Hello webman
 </body>
 </html>

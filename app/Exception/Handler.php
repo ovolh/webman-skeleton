@@ -1,12 +1,12 @@
 <?php
 
-namespace support\exception;
+namespace App\Exception;
 
 use App\Util\ReturnCode;
 use Tinywan\ExceptionHandler\Handler as baseHandler;
 use Webman\Http\Response;
 
-class ApiHandler extends baseHandler
+class Handler extends baseHandler
 {
     public $errorCode = ReturnCode::INVALID;
 
@@ -19,9 +19,8 @@ class ApiHandler extends baseHandler
     {
         $bodyKey = array_keys($this->config['body']);
         $responseBody = [
-                $bodyKey[0] ?? 'code' => $this->errorCode,
+                $bodyKey[0] ?? 'code' => $this->errorCode ?: $this->config['body']['code'],
                 $bodyKey[1] ?? 'message' => $this->errorMessage,
-
         ];
         if (config('app.debug')) {
             $responseBody[$bodyKey[2] ?? 'data'] = $this->responseData;

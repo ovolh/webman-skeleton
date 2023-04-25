@@ -26,6 +26,12 @@ use Webman\MiddlewareInterface;
  */
 class ApiAuthMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param Request $request
+     * @param callable $next
+     * @return Response
+     * @throws BadRequestHttpException
+     */
     public function process(Request $request, callable $next): Response
     {
         $user = Auth::guard('user')->user(); //当前登入用户

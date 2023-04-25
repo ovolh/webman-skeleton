@@ -12,7 +12,8 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use support\Request;
+
+use App\Request;
 
 return [
     'debug' => (bool) env('APP_DEBUG', FALSE),

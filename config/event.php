@@ -6,7 +6,7 @@ return [
         // ...其它事件处理函数...
     ],
     'user.logout' => [
-        [app\Event\User::class, 'logout'],
+        [App\Event\User::class, 'logout'],
         // ...其它事件处理函数...
     ]
 ];

@@ -2,13 +2,13 @@
 
 namespace App\Api\Controller;
 
-use support\Request;
+use App\Request;
 
 class IndexController
 {
     public function index(Request $request): \support\Response
     {
-        return success_json();
+        return success();
     }
 
 }

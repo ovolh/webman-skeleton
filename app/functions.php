@@ -33,7 +33,7 @@ function api_json($data, int $httpCode = 200, array $headers = [], int $options 
  * @param array $headers
  * @return Response
  */
-function success_json($data = [], string $message = 'success',int $code = ReturnCode::SUCCESS, array $headers = []): Response
+function success($data = [], string $message = 'success', int $code = ReturnCode::SUCCESS, array $headers = []): Response
 {
     if ($data) {
         if (is_string($data)) {
@@ -52,7 +52,7 @@ function success_json($data = [], string $message = 'success',int $code = Return
  * @param array $headers
  * @return Response
  */
-function fail_json(string $message = 'fail', $data = [], int $code = ReturnCode::INVALID, array $headers = []): Response
+function fail(string $message = 'fail', $data = [], int $code = ReturnCode::INVALID, array $headers = []): Response
 {
     if ($data) {
         if (is_string($data)) {

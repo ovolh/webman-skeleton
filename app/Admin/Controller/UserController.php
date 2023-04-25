@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controller;
 
-use support\Request;
+use App\Request;
 
 
 class UserController
@@ -15,6 +15,7 @@ class UserController
      */
     public function userInfo(Request $request): \support\Response
     {
-        return success_json($request->user);
+
+        return success($request->user);
     }
 }

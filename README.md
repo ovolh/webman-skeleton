@@ -1,7 +1,7 @@
 # 自用 webman 封装骨架
 
 ## 环境要求
-- PHP >= 8.0 && < 8.2
+- PHP >= 8.0
 
 - Composer >= 2.0
 
@@ -24,26 +24,19 @@ cp .env.example .env
 
 4. 修改 .env 中环境变量
 
-5. 执行数据迁移
-```bash
-php vendor/bin/phinx migrate
-php vendor/bin/phinx seed:run
-```
-6. 生成JWT密钥(命令行)等
+5. 生成JWT密钥(命令行)等
 ```bash
 php webman shopwwi:auth
 php webman key:generate
 ```
    
-7. 启动
+6. 启动
     - 调试模式 `php webman start`
     - 正式环境 `php webman start -d`
 
 ## 扩展包说明
 - 数据库
-[illuminate/database](https://learnku.com/docs/laravel/8.x/database/9400)
-- 数据库迁移工具
-[robmorgan/phinx](https://tsy12321.gitbooks.io/phinx-doc/content/)
+[illuminate/database](https://learnku.com/docs/laravel/10.x/database/9400)
 - Redis
 [illuminate/redis](https://github.com/illuminate/redis)
 - Cache
@@ -51,26 +44,30 @@ php webman key:generate
 - Redis 队列
 [webman/redis-queue](https://www.workerman.net/plugin/12)
 - 验证器
-[taoser/webman-validate](https://www.workerman.net/plugin/41) 不支持 `unquire`
+[tinywan/validate](https://www.workerman.net/plugin/7) 不支持 `unquire`
 - 多语言
 [symfony/translation](https://www.workerman.net/doc/webman/components/translation.html)
 - Event 事件
 [webman/event](https://www.workerman.net/plugin/64)
 - Env 环境变量
 [vlucas/phpdotenv](https://www.workerman.net/doc/webman/components/env.html)
-- crontab定时任务
-[yzh52521/webman-task](https://www.workerman.net/plugin/42)
-- 命令行
-[webman/console](https://www.workerman.net/doc/webman/plugin/console.html)
-- HTTP客户端
-[yzh52521/easyhttp](https://www.workerman.net/plugin/94)
-- laravel-filesystem 文件系统
-[webman-tech/laravel-filesystem](https://www.workerman.net/plugin/87)
+- 文件存储
+  [shopwwi/webman-filesystem](https://www.workerman.net/plugin/19)
 - 日志插件
-[webman/log](https://www.workerman.net/plugin/61)
-- 跨域请求
-[webman/cors](https://www.workerman.net/plugin/31)
+  [webman/log](https://www.workerman.net/plugin/61)
 - 🔑Auth多用户认证/单点登入
-[shopwwi/webman-auth](https://www.workerman.net/plugin/24)
+  [shopwwi/webman-auth](https://www.workerman.net/plugin/24)
 - Exception 异常
-[tinywan/exception-handler](https://www.workerman.net/plugin/16)
+  [tinywan/exception-handler](https://www.workerman.net/plugin/16)
+- 跨域请求
+  [webman/cors](https://www.workerman.net/plugin/31)
+- 命令行
+  [webman/console](https://www.workerman.net/doc/webman/plugin/console.html)
+- HTTP客户端
+  [yzh52521/easyhttp](https://www.workerman.net/plugin/94)
+- 业务锁
+  [yzh52521/webman-lock](https://www.workerman.net/plugin/56)
+- 限流中间件
+  [yzh52521/webman-throttle](https://www.workerman.net/plugin/26)
+- crontab定时任务
+[workerman/crontab](https://www.workerman.net/doc/webman/components/crontab.html)

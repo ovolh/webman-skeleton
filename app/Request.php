@@ -12,11 +12,14 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use support\view\Raw;
-use support\view\Twig;
-use support\view\Blade;
-use support\view\ThinkPHP;
+namespace App;
 
-return [
-    'handler' => Blade::class
-];
+
+/**
+ * Class Request
+ * @package support
+ */
+class Request extends \support\Request
+{
+
+}

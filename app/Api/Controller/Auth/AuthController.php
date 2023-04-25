@@ -2,8 +2,8 @@
 
 namespace App\Api\Controller\Auth;
 
+use App\Request;
 use Shopwwi\WebmanAuth\Facade\Auth;
-use support\Request;
 
 class AuthController
 {
@@ -16,7 +16,7 @@ class AuthController
     public function refreshToken(Request $request)
     {
         $refresh = Auth::guard('admin')->fail()->refresh();
-        return success_json($refresh, '刷新token成功');
+        return success($refresh, '刷新token成功');
     }
 
 }

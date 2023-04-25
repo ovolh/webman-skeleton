@@ -26,6 +26,13 @@ use Webman\MiddlewareInterface;
  */
 class AdminAuthMiddleware implements MiddlewareInterface
 {
+    /**
+     * 后台用户
+     * @param Request $request
+     * @param callable $next
+     * @return Response
+     * @throws BadRequestHttpException
+     */
     public function process(Request $request, callable $next): Response
     {
         $user = Auth::guard('admin')->fail()->user(); //当前登入管理员

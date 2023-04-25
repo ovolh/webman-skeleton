@@ -1,6 +1,6 @@
 <?php
 return [
-    'default' => 'redis',
+    'default' => env('CACHE_DRIVER', 'file'),
     'stores' => [
         'apc' => [
             'driver' => 'apc',

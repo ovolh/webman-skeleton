@@ -19,7 +19,7 @@ use Webman\Route;
 
 
 // 引用 routes 中的路由文件
-foreach (glob(BASE_PATH . "/routes/*.php") as $filename) {
+foreach (glob(BASE_PATH . "/route/*.php") as $filename) {
     require_once $filename;
 }
 
@@ -80,7 +80,5 @@ Route::fallback(function (Request $request) {
 
     return $response;
 });
-# 关闭自动路由
+// 关闭自动路由
 Route::disableDefaultRoute();
-
-

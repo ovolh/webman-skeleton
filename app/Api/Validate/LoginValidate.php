@@ -2,7 +2,8 @@
 
 namespace App\Api\Validate;
 
-use taoser\Validate;
+
+use App\Validate;
 
 class LoginValidate extends Validate
 {

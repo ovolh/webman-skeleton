@@ -6,7 +6,8 @@ declare (strict_types=1);
 
 namespace App\Util;
 
-class ReturnCode {
+class ReturnCode
+{
 
     const SUCCESS = 1;
     const INVALID = -1;
@@ -40,7 +41,8 @@ class ReturnCode {
     const UNKNOWN = -998;
     const EXCEPTION = -999;
 
-    public static function getConstants(): array {
+    public static function getConstants(): array
+    {
         $oClass = new \ReflectionClass(__CLASS__);
 
         return $oClass->getConstants();

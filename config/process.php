@@ -21,16 +21,17 @@ return [
         'reloadable' => false,
         'constructor' => [
             // Monitor these directories
-            'monitor_dir' => array_merge([
+            'monitorDir' => array_merge([
                 app_path(),
                 config_path(),
                 base_path() . '/process',
                 base_path() . '/support',
                 base_path() . '/resource',
+                base_path() . '/route',
                 base_path() . '/.env',
             ], glob(base_path() . '/plugin/*/app'), glob(base_path() . '/plugin/*/config'), glob(base_path() . '/plugin/*/api')),
             // Files with these suffixes will be monitored
-            'monitor_extensions' => [
+            'monitorExtensions' => [
                 'php', 'html', 'htm', 'env'
             ],
             'options' => [
@@ -38,5 +39,8 @@ return [
                 'enable_memory_monitor' => DIRECTORY_SEPARATOR === '/',
             ]
         ]
-    ]
+    ],
+    'task'  => [
+        'handler'  => process\Task::class
+    ],
 ];
