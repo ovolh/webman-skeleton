@@ -18,5 +18,5 @@ use support\view\Blade;
 use support\view\ThinkPHP;
 
 return [
-    'handler' => Blade::class
+    'handler' => Raw::class
 ];

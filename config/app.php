@@ -12,11 +12,10 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-
-use App\Request;
+use support\Request;
 
 return [
-    'debug' => (bool) env('APP_DEBUG', FALSE),
+    'debug' => true,
     'error_reporting' => E_ALL,
     'default_timezone' => 'Asia/Shanghai',
     'request_class' => Request::class,
@@ -24,7 +23,4 @@ return [
     'runtime_path' => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
     'controller_suffix' => 'Controller',
     'controller_reuse' => false,
-    'name' => env('APP_NAME', 'webman'),
-    'env' => env('APP_ENV', 'production'),
-    'url' => env('APP_URL', 'http://localhost'),
 ];
