@@ -3,12 +3,14 @@
 namespace app\api\controller;
 
 use app\Request;
+use app\util\wechat\MiniApp;
 
 class IndexController
 {
     public function index(Request $request): \support\Response
     {
-        return success();
+        $res = MiniApp::getConfig('app_id', '12323');
+        return success($res);
     }
 
 }

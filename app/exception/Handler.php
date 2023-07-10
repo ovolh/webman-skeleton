@@ -3,8 +3,11 @@
 namespace app\exception;
 
 use app\util\ReturnCode;
+use FastRoute\BadRouteException;
 use Throwable;
+use Tinywan\ExceptionHandler\Exception\ServerErrorHttpException;
 use Tinywan\ExceptionHandler\Handler as baseHandler;
+use Tinywan\Validate\Exception\ValidateException;
 use Webman\Http\Response;
 
 class Handler extends baseHandler
@@ -12,19 +15,20 @@ class Handler extends baseHandler
     public $errorCode = ReturnCode::INVALID;
 
     /**
-     * 处理异常数据.
-     *
+     * 处理扩展的异常
      * @param Throwable $e
+     *
      */
-    protected function solveAllException(Throwable $e)
+    protected function solveExtraException(Throwable $e): void
     {
-        parent::solveAllException($e);
-        if ($e instanceof \Exception) {
-            $this->errorCode = $e->getCode() > 0 ? \app\util\ReturnCode::INVALID : $e->getCode();
-            $this->errorMessage = $e->getMessage();
+        parent::solveExtraException($e);
+        $this->errorCode = $e->getCode() > 0 ? \app\util\ReturnCode::INVALID : $e->getCode();
+        if (config('app.debug')) {
+            if ($this->errorMessage === 'Server Unknown Error') {
+                $this->errorMessage = $e->getMessage();
+            }
         }
     }
-
     /**
      * 构造 Response.
      *

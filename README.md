@@ -76,3 +76,5 @@ php webman key:generate
   [yzh52521/webman-mailer](https://www.workerman.net/plugin/32)
 - 数据迁移填充
   [pxianyu/migrations](https://www.workerman.net/plugin/112)
+- 微信 SDK
+  [w7corp/easywechat](https://easywechat.com/6.x/index.html)
