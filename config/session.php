@@ -13,8 +13,6 @@
  */
 
 use Webman\Session\FileSessionHandler;
-use Webman\Session\RedisSessionHandler;
-use Webman\Session\RedisClusterSessionHandler;
 
 return [
 
@@ -27,11 +25,11 @@ return [
             'save_path' => runtime_path() . '/sessions',
         ],
         'redis' => [
-            'host' => '127.0.0.1',
-            'port' => 6379,
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'port' => env('REDIS_PORT', 6379),
             'auth' => '',
             'timeout' => 2,
-            'database' => '',
+            'database' => env('REDIS_SESSION_DATABASE', 3),
             'prefix' => 'redis_session_',
         ],
         'redis_cluster' => [
@@ -43,21 +41,21 @@ return [
     ],
 
     'session_name' => 'PHPSID',
-    
+
     'auto_update_timestamp' => false,
 
-    'lifetime' => 7*24*60*60,
+    'lifetime' => 7 * 24 * 60 * 60,
 
-    'cookie_lifetime' => 365*24*60*60,
+    'cookie_lifetime' => 365 * 24 * 60 * 60,
 
     'cookie_path' => '/',
 
     'domain' => '',
-    
+
     'http_only' => true,
 
     'secure' => false,
-    
+
     'same_site' => '',
 
     'gc_probability' => [1, 1000],

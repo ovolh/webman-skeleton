@@ -12,10 +12,13 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-use support\Request;
+use app\Request;
 
 return [
-    'debug' => true,
+    'name' => env('APP_NAME', 'webman'),
+    'env' => env('APP_ENV', 'production'),
+    'url' => env('APP_URL', 'http://localhost'),
+    'debug' => env('APP_DEBUG', false),
     'error_reporting' => E_ALL,
     'default_timezone' => 'Asia/Shanghai',
     'request_class' => Request::class,

@@ -4,15 +4,20 @@ namespace app\model;
 
 use support\Model;
 
-class Test extends Model
+class AdminUser extends Model
 {
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'test';
-
+    protected $table = 'admin_users';
     /**
      * The primary key associated with the table.
      *
@@ -20,10 +25,5 @@ class Test extends Model
      */
     protected $primaryKey = 'id';
 
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    protected $hidden = ['password'];
 }

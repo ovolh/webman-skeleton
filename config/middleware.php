@@ -12,4 +12,17 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-return [];
+
+return [
+    // 全局中间件
+    '' => [
+        app\middleware\Throttle::class,
+    ],
+    // api应用中间件
+    'api' => [
+    ],
+    // admin应用中间件
+    'admin' => [
+    ],
+
+];

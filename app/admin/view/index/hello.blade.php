@@ -9,6 +9,6 @@
 
 </head>
 <body>
-hello <?=htmlspecialchars($name)?>
+Hello webman
 </body>
 </html>

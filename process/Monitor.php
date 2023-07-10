@@ -28,50 +28,17 @@ use Workerman\Worker;
 class Monitor
 {
     /**
+     * @var string
+     */
+    public static $lockFile = __DIR__ . '/../runtime/monitor.lock';
+    /**
      * @var array
      */
     protected $paths = [];
-
     /**
      * @var array
      */
     protected $extensions = [];
-
-    /**
-     * @var string
-     */
-    public static $lockFile = __DIR__ . '/../runtime/monitor.lock';
-
-    /**
-     * Pause monitor
-     * @return void
-     */
-    public static function pause()
-    {
-        file_put_contents(static::$lockFile, time());
-    }
-
-    /**
-     * Resume monitor
-     * @return void
-     */
-    public static function resume(): void
-    {
-        clearstatcache();
-        if (is_file(static::$lockFile)) {
-            unlink(static::$lockFile);
-        }
-    }
-
-    /**
-     * Whether monitor is paused
-     * @return bool
-     */
-    public static function isPaused(): bool
-    {
-        clearstatcache();
-        return file_exists(static::$lockFile);
-    }
 
     /**
      * FileMonitor constructor.
@@ -105,6 +72,44 @@ class Monitor
     }
 
     /**
+     * Resume monitor
+     * @return void
+     */
+    public static function resume(): void
+    {
+        clearstatcache();
+        if (is_file(static::$lockFile)) {
+            unlink(static::$lockFile);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function checkAllFilesChange(): bool
+    {
+        if (static::isPaused()) {
+            return false;
+        }
+        foreach ($this->paths as $path) {
+            if ($this->checkFilesChange($path)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whether monitor is paused
+     * @return bool
+     */
+    public static function isPaused(): bool
+    {
+        clearstatcache();
+        return file_exists(static::$lockFile);
+    }
+
+    /**
      * @param $monitorDir
      * @return bool
      */
@@ -127,7 +132,7 @@ class Monitor
         }
         $count = 0;
         foreach ($iterator as $file) {
-            $count ++;
+            $count++;
             /** var SplFileInfo $file */
             if (is_dir($file->getRealPath())) {
                 continue;
@@ -135,7 +140,7 @@ class Monitor
             // check mtime
             if (in_array($file->getExtension(), $this->extensions, true) && $lastMtime < $file->getMTime()) {
                 $var = 0;
-                exec('"'.PHP_BINARY . '" -l ' . $file, $out, $var);
+                exec('"' . PHP_BINARY . '" -l ' . $file, $out, $var);
                 $lastMtime = $file->getMTime();
                 if ($var) {
                     continue;
@@ -155,53 +160,6 @@ class Monitor
             $tooManyFilesCheck = 1;
         }
         return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function checkAllFilesChange(): bool
-    {
-        if (static::isPaused()) {
-            return false;
-        }
-        foreach ($this->paths as $path) {
-            if ($this->checkFilesChange($path)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param $memoryLimit
-     * @return void
-     */
-    public function checkMemory($memoryLimit)
-    {
-        if (static::isPaused() || $memoryLimit <= 0) {
-            return;
-        }
-        $ppid = posix_getppid();
-        $childrenFile = "/proc/$ppid/task/$ppid/children";
-        if (!is_file($childrenFile) || !($children = file_get_contents($childrenFile))) {
-            return;
-        }
-        foreach (explode(' ', $children) as $pid) {
-            $pid = (int)$pid;
-            $statusFile = "/proc/$pid/status";
-            if (!is_file($statusFile) || !($status = file_get_contents($statusFile))) {
-                continue;
-            }
-            $mem = 0;
-            if (preg_match('/VmRSS\s*?:\s*?(\d+?)\s*?kB/', $status, $match)) {
-                $mem = $match[1];
-            }
-            $mem = (int)($mem / 1024);
-            if ($mem >= $memoryLimit) {
-                posix_kill($pid, SIGINT);
-            }
-        }
     }
 
     /**
@@ -239,5 +197,45 @@ class Monitor
             $memoryLimit = (int)(0.8 * $memoryLimit);
         }
         return $memoryLimit;
+    }
+
+    /**
+     * Pause monitor
+     * @return void
+     */
+    public static function pause()
+    {
+        file_put_contents(static::$lockFile, time());
+    }
+
+    /**
+     * @param $memoryLimit
+     * @return void
+     */
+    public function checkMemory($memoryLimit)
+    {
+        if (static::isPaused() || $memoryLimit <= 0) {
+            return;
+        }
+        $ppid = posix_getppid();
+        $childrenFile = "/proc/$ppid/task/$ppid/children";
+        if (!is_file($childrenFile) || !($children = file_get_contents($childrenFile))) {
+            return;
+        }
+        foreach (explode(' ', $children) as $pid) {
+            $pid = (int)$pid;
+            $statusFile = "/proc/$pid/status";
+            if (!is_file($statusFile) || !($status = file_get_contents($statusFile))) {
+                continue;
+            }
+            $mem = 0;
+            if (preg_match('/VmRSS\s*?:\s*?(\d+?)\s*?kB/', $status, $match)) {
+                $mem = $match[1];
+            }
+            $mem = (int)($mem / 1024);
+            if ($mem >= $memoryLimit) {
+                posix_kill($pid, SIGINT);
+            }
+        }
     }
 }

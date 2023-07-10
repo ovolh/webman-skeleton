@@ -13,7 +13,7 @@
  */
 
 return [
-    'listen' => 'http://0.0.0.0:8787',
+    'listen' => 'http://0.0.0.0:' . env('APP_LISTEN_HOST'),
     'transport' => 'tcp',
     'context' => [],
     'name' => 'webman',
