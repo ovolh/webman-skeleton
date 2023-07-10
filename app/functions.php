@@ -63,7 +63,7 @@ function fail(string $message = 'fail', $data = [], int $code = ReturnCode::INVA
 }
 
 /**
- *
+ * 返回函数
  * @param int|string $status
  * @param string $message
  * @param array $data
