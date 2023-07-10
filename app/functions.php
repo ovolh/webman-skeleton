@@ -61,3 +61,19 @@ function fail(string $message = 'fail', $data = [], int $code = ReturnCode::INVA
     }
     return api_json(['code' => $code, 'message' => $message, 'data' => $data], 200, $headers);
 }
+
+/**
+ *
+ * @param int|string $status
+ * @param string $message
+ * @param array $data
+ * @return array
+ */
+function call_back(int|string $status, string $message = '', array $data = []): array
+{
+    return [
+        'status' => $status,
+        'message' => $message,
+        'data' => $data
+    ];
+}
