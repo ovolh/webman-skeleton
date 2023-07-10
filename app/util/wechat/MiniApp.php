@@ -11,7 +11,7 @@ class MiniApp
     /**
      * @var array
      */
-    protected static $instance = [];
+    protected static array $instance = [];
 
     /**
      * @param string $name
