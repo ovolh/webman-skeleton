@@ -20,7 +20,7 @@ class Handler extends baseHandler
     {
         parent::solveAllException($e);
         if ($e instanceof \Exception) {
-            $this->errorCode = $e->getCode();
+            $this->errorCode = $e->getCode() > 0 ? \app\util\ReturnCode::INVALID : $e->getCode();
             $this->errorMessage = $e->getMessage();
         }
     }

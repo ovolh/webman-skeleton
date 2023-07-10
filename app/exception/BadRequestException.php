@@ -10,7 +10,7 @@ class BadRequestException extends BaseException
     /**
      * @var int
      */
-    public $statusCode = 200;
+    public $statusCode = 400;
 
     /**
      * @var int

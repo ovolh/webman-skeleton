@@ -27,7 +27,7 @@ return [
         ],
         // 自定义响应消息
         'body' => [
-            'code' => 0,
+            'code' => \app\util\ReturnCode::INVALID,
             'message' => '服务器内部异常',
             'data' => null
         ],
