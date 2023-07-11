@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "95bee3bead74d85ee63e0cc39a4dc67b",
+    "content-hash": "48b9d6f0053143327c677e570707bd62",
     "packages": [
         {
             "name": "brick/math",
@@ -7430,6 +7430,46 @@
                 "source": "https://github.com/yzh52521/webman-throttle/tree/v1.0.10"
             },
             "time": "2022-09-13T07:37:11+00:00"
+        },
+        {
+            "name": "zjkal/time-helper",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zjkal/time-helper.git",
+                "reference": "b95488a423096a8f49fe1996d83395fe58f8592a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zjkal/time-helper/zipball/b95488a423096a8f49fe1996d83395fe58f8592a",
+                "reference": "b95488a423096a8f49fe1996d83395fe58f8592a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "zjkal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zjkal",
+                    "email": "zjkal@qq.com"
+                }
+            ],
+            "description": "最方便的PHP时间助手类, 所有方法都可以传入任意类型的时间日期格式或者时间戳",
+            "support": {
+                "issues": "https://github.com/zjkal/time-helper/issues",
+                "source": "https://github.com/zjkal/time-helper/tree/v1.1.0"
+            },
+            "time": "2023-03-08T04:02:18+00:00"
         },
         {
             "name": "zoujingli/ip2region",
