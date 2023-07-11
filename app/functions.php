@@ -27,13 +27,13 @@ function api_json(array $data, int $httpCode = 200, array $headers = [], int $op
 /**
  * 成功返回json
  *
- * @param array $data
+ * @param array|string $data
  * @param string $message
  * @param integer $code
  * @param array $headers
  * @return Response
  */
-function success(array $data = [], string $message = 'success', int $code = ReturnCode::SUCCESS, array $headers = []): Response
+function success(array|string $data = [], string $message = 'success', int $code = ReturnCode::SUCCESS, array $headers = []): Response
 {
     if ($data) {
         if (is_string($data)) {
