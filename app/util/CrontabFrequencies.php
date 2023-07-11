@@ -2,73 +2,311 @@
 
 namespace app\util;
 
+use Illuminate\Support\Carbon;
+
 class CrontabFrequencies
 {
-    public string $rule = '* * * * * *';
+    public string $expression = '* * * * * *';
 
     /**
-     * 获取rule
-     * @return string
+     * The Cron expression representing the event's frequency.
+     *
+     * @param string $expression
+     * @return $this
      */
-    public function getRule()
+    public function cron(string $expression)
     {
-        return $this->rule;
+        $this->expression = $expression;
+
+        return $this;
     }
 
     /**
-     * 按小时执行
+     *
+     * @return string
+     */
+    public function getExpression(): string
+    {
+        return $this->expression;
+    }
+
+    /**
+     * 每1秒
+     *
+     * @return $this
+     */
+    public function everySecond()
+    {
+        return $this->spliceIntoPosition(1, '*');
+    }
+
+    /**
+     * 每2秒
+     *
+     * @return $this
+     */
+    public function everyTwoSecond()
+    {
+        return $this->spliceIntoPosition(1, '*/2');
+    }
+
+    /**
+     * 每3秒
+     *
+     * @return $this
+     */
+    public function everyThreeSecond()
+    {
+        return $this->spliceIntoPosition(2, '*/3');
+    }
+
+    /**
+     * 每4秒
+     *
+     * @return $this
+     */
+    public function everyFourSecond()
+    {
+        return $this->spliceIntoPosition(1, '*/4');
+    }
+
+    /**
+     * 每5秒
+     *
+     * @return $this
+     */
+    public function everyFiveSecond()
+    {
+        return $this->spliceIntoPosition(1, '*/5');
+    }
+
+    /**
+     * 每10秒
+     *
+     * @return $this
+     */
+    public function everyTenSecond()
+    {
+        return $this->spliceIntoPosition(1, '*/10');
+    }
+
+    /**
+     * 每15秒
+     *
+     * @return $this
+     */
+    public function everyFifteenSecond()
+    {
+        return $this->spliceIntoPosition(1, '*/15');
+    }
+
+    /**
+     * 每30秒
+     *
+     * @return $this
+     */
+    public function everyThirtySecond()
+    {
+        return $this->spliceIntoPosition(1, '0,30');
+    }
+
+    /**
+     * 每几秒
+     *
+     * @return $this
+     */
+    public function everyNumSecond($num = 1)
+    {
+        return $this->spliceIntoPosition(1, '*/' . $num);
+    }
+
+    /**
+     * 每1分钟
+     *
+     * @return $this
+     */
+    public function everyMinute()
+    {
+        return $this->spliceIntoPosition(2, '*');
+    }
+
+    /**
+     * 每2分钟
+     *
+     * @return $this
+     */
+    public function everyTwoMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/2');
+    }
+
+    /**
+     * 每3分钟
+     *
+     * @return $this
+     */
+    public function everyThreeMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/3');
+    }
+
+    /**
+     * 每4分钟
+     *
+     * @return $this
+     */
+    public function everyFourMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/4');
+    }
+
+    /**
+     * 每5分钟
+     *
+     * @return $this
+     */
+    public function everyFiveMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/5');
+    }
+
+    /**
+     * 每10分钟
+     *
+     * @return $this
+     */
+    public function everyTenMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/10');
+    }
+
+    /**
+     * 每15分钟
+     *
+     * @return $this
+     */
+    public function everyFifteenMinutes()
+    {
+        return $this->spliceIntoPosition(2, '*/15');
+    }
+
+    /**
+     * 每30分钟
+     *
+     * @return $this
+     */
+    public function everyThirtyMinutes()
+    {
+        return $this->spliceIntoPosition(2, '0,30');
+    }
+
+    /**
+     * 每几分钟
+     *
+     * @return $this
+     */
+    public function everyNumMinutes($num = 1)
+    {
+        return $this->spliceIntoPosition(2, '*/' . $num);
+    }
+
+    /**
+     * 每小时
      *
      * @return $this
      */
     public function hourly()
     {
-        return $this->spliceIntoPosition(2, 0);
-    }
-
-    protected function spliceIntoPosition($position, $value)
-    {
-        $segments = explode(' ', $this->rule);
-
-        $segments[$position - 1] = $value;
-
-        return $this->rule(implode(' ', $segments));
+        return $this->spliceIntoPosition(2, 0)->spliceIntoPosition(1, 0);
     }
 
     /**
-     * 设置任务执行周期
-     * @param $rule
-     * @return $this
-     */
-    public function rule($rule)
-    {
-        $this->rule = $rule;
-        return $this;
-    }
-
-    /**
-     * 按小时延期执行
+     * 每小时，在具体时间
      *
-     * @param int $offset
+     * @param array|int $offset
      * @return $this
      */
     public function hourlyAt($offset)
     {
-        return $this->spliceIntoPosition(2, $offset);
+        $offset = is_array($offset) ? implode(',', $offset) : $offset;
+
+        return $this->spliceIntoPosition(2, $offset)->spliceIntoPosition(1, 0);
     }
 
     /**
-     * 按天执行
+     * 将活动安排为每隔奇数小时运行一次。
+     *
+     * @return $this
+     */
+    public function everyOddHour()
+    {
+        return $this->spliceIntoPosition(2, 0)
+            ->spliceIntoPosition(3, '1-23/2')
+            ->spliceIntoPosition(1, 0);
+    }
+
+    /**
+     * 每2小时
+     *
+     * @return $this
+     */
+    public function everyTwoHours()
+    {
+        return $this->spliceIntoPosition(2, 0)
+            ->spliceIntoPosition(3, '*/2')
+            ->spliceIntoPosition(1, 0);
+    }
+
+    /**
+     * 每3小时
+     *
+     * @return $this
+     */
+    public function everyThreeHours()
+    {
+        return $this->spliceIntoPosition(2, 0)
+            ->spliceIntoPosition(3, '*/3')
+            ->spliceIntoPosition(1, 0);
+    }
+
+    /**
+     * 每4小时
+     *
+     * @return $this
+     */
+    public function everyFourHours()
+    {
+        return $this->spliceIntoPosition(2, 0)
+            ->spliceIntoPosition(3, '*/4')
+            ->spliceIntoPosition(1, 0);
+    }
+
+    /**
+     * 每6小时
+     *
+     * @return $this
+     */
+    public function everySixHours()
+    {
+        return $this->spliceIntoPosition(2, 0)
+            ->spliceIntoPosition(3, '*/6')
+            ->spliceIntoPosition(1, 0);
+    }
+
+    /**
+     * 每天
      *
      * @return $this
      */
     public function daily()
     {
         return $this->spliceIntoPosition(2, 0)
-            ->spliceIntoPosition(3, 0);
+            ->spliceIntoPosition(3, 0)
+            ->spliceIntoPosition(1, 0);
     }
 
     /**
-     * 指定时间执行
+     * 每天固定时间 (10:00:34, 19:30, etc).
      *
      * @param string $time
      * @return $this
@@ -79,9 +317,9 @@ class CrontabFrequencies
     }
 
     /**
-     * 指定时间执行
+     * 每天固定时间 (10:00:34, 19:30, etc).
      *
-     * @param string $time 01:12:13 时：分：秒
+     * @param string $time
      * @return $this
      */
     public function dailyAt($time)
@@ -89,12 +327,12 @@ class CrontabFrequencies
         $segments = explode(':', $time);
 
         return $this->spliceIntoPosition(3, (int)$segments[0])
-            ->spliceIntoPosition(2, count($segments) == 2 ? (int)$segments[1] : '0')
-            ->spliceIntoPosition(1, count($segments) == 3 ? (int)$segments[2] : '0');
+            ->spliceIntoPosition(2, count($segments) === 2 ? (int)$segments[1] : '0')
+            ->spliceIntoPosition(1, count($segments) === 3 ? (int)$segments[2] : '0');
     }
 
     /**
-     * 每天执行两次
+     * 每天两次
      *
      * @param int $first
      * @param int $second
@@ -102,10 +340,24 @@ class CrontabFrequencies
      */
     public function twiceDaily($first = 1, $second = 13)
     {
+        return $this->twiceDailyAt($first, $second, 0);
+    }
+
+    /**
+     * 固定时间每天2次
+     *
+     * @param int $first
+     * @param int $second
+     * @param int $offset
+     * @return $this
+     */
+    public function twiceDailyAt($first = 1, $second = 13, $offset = 0)
+    {
         $hours = $first . ',' . $second;
 
-        return $this->spliceIntoPosition(2, 0)
-            ->spliceIntoPosition(3, $hours);
+        return $this->spliceIntoPosition(2, $offset)
+            ->spliceIntoPosition(3, $hours)
+            ->spliceIntoPosition(1, 0);
     }
 
     /**
@@ -115,7 +367,7 @@ class CrontabFrequencies
      */
     public function weekdays()
     {
-        return $this->spliceIntoPosition(6, '1-5');
+        return $this->days('1-5');
     }
 
     /**
@@ -125,7 +377,7 @@ class CrontabFrequencies
      */
     public function weekends()
     {
-        return $this->spliceIntoPosition(6, '0,6');
+        return $this->days('0,6');
     }
 
     /**
@@ -136,19 +388,6 @@ class CrontabFrequencies
     public function mondays()
     {
         return $this->days(1);
-    }
-
-    /**
-     * 按周设置天执行
-     *
-     * @param array|mixed $days
-     * @return $this
-     */
-    public function days($days)
-    {
-        $days = is_array($days) ? $days : func_get_args();
-
-        return $this->spliceIntoPosition(7, implode(',', $days));
     }
 
     /**
@@ -218,7 +457,8 @@ class CrontabFrequencies
      */
     public function weekly()
     {
-        return $this->spliceIntoPosition(2, 0)
+        return $this->spliceIntoPosition(1, 0)
+            ->spliceIntoPosition(2, 0)
             ->spliceIntoPosition(3, 0)
             ->spliceIntoPosition(6, 0);
     }
@@ -226,15 +466,15 @@ class CrontabFrequencies
     /**
      * 指定每周的时间执行
      *
-     * @param int $day
+     * @param array|mixed $dayOfWeek
      * @param string $time
      * @return $this
      */
-    public function weeklyOn($day, $time = '0:0')
+    public function weeklyOn($dayOfWeek, $time = '0:0:0')
     {
         $this->dailyAt($time);
 
-        return $this->spliceIntoPosition(6, $day);
+        return $this->days($dayOfWeek);
     }
 
     /**
@@ -244,7 +484,8 @@ class CrontabFrequencies
      */
     public function monthly()
     {
-        return $this->spliceIntoPosition(2, 0)
+        return $this->spliceIntoPosition(1, 0)
+            ->spliceIntoPosition(2, 0)
             ->spliceIntoPosition(3, 0)
             ->spliceIntoPosition(4, 1);
     }
@@ -252,15 +493,15 @@ class CrontabFrequencies
     /**
      * 指定每月的执行时间
      *
-     * @param int $day
+     * @param int $dayOfMonth
      * @param string $time
      * @return $this
      */
-    public function monthlyOn($day = 1, $time = '0:0')
+    public function monthlyOn($dayOfMonth = 1, $time = '0:0:0')
     {
         $this->dailyAt($time);
 
-        return $this->spliceIntoPosition(4, $day);
+        return $this->spliceIntoPosition(4, $dayOfMonth);
     }
 
     /**
@@ -268,15 +509,29 @@ class CrontabFrequencies
      *
      * @param int $first
      * @param int $second
+     * @param string $time
      * @return $this
      */
-    public function twiceMonthly($first = 1, $second = 16)
+    public function twiceMonthly($first = 1, $second = 16, $time = '0:0:0')
     {
-        $days = $first . ',' . $second;
+        $daysOfMonth = $first . ',' . $second;
 
-        return $this->spliceIntoPosition(2, 0)
-            ->spliceIntoPosition(3, 0)
-            ->spliceIntoPosition(4, $days);
+        $this->dailyAt($time);
+
+        return $this->spliceIntoPosition(4, $daysOfMonth);
+    }
+
+    /**
+     * 每月最后一天执行
+     *
+     * @param string $time
+     * @return $this
+     */
+    public function lastDayOfMonth($time = '0:0:0')
+    {
+        $this->dailyAt($time);
+
+        return $this->spliceIntoPosition(4, Carbon::now()->endOfMonth()->day);
     }
 
     /**
@@ -286,10 +541,26 @@ class CrontabFrequencies
      */
     public function quarterly()
     {
-        return $this->spliceIntoPosition(2, 0)
+        return $this->spliceIntoPosition(1, 0)
+            ->spliceIntoPosition(2, 0)
             ->spliceIntoPosition(3, 0)
             ->spliceIntoPosition(4, 1)
-            ->spliceIntoPosition(5, '*/3');
+            ->spliceIntoPosition(5, '1-12/3');
+    }
+
+    /**
+     * 指定季度的执行时间
+     *
+     * @param int $dayOfQuarter
+     * @param int $time
+     * @return $this
+     */
+    public function quarterlyOn($dayOfQuarter = 1, $time = '0:0:0')
+    {
+        $this->dailyAt($time);
+
+        return $this->spliceIntoPosition(4, $dayOfQuarter)
+            ->spliceIntoPosition(5, '1-12/3');
     }
 
     /**
@@ -299,92 +570,55 @@ class CrontabFrequencies
      */
     public function yearly()
     {
-        return $this->spliceIntoPosition(2, 0)
+        return $this->spliceIntoPosition(1, 0)
+            ->spliceIntoPosition(2, 0)
             ->spliceIntoPosition(3, 0)
             ->spliceIntoPosition(4, 1)
             ->spliceIntoPosition(5, 1);
     }
 
     /**
-     * 每秒执行
+     * 指定具体年执行
      *
+     * @param int $month
+     * @param int|string $dayOfMonth
+     * @param string $time
      * @return $this
      */
-    public function everySecond()
+    public function yearlyOn($month = 1, $dayOfMonth = 1, $time = '0:0:0')
     {
-        return $this->spliceIntoPosition(1, '*/1');
+        $this->dailyAt($time);
+
+        return $this->spliceIntoPosition(4, $dayOfMonth)
+            ->spliceIntoPosition(5, $month);
     }
 
     /**
-     * 每5秒执行
+     * Set the days of the week the command should run on.
      *
+     * @param array|mixed $days
      * @return $this
      */
-    public function everyFiveSecond()
+    public function days($days)
     {
-        return $this->spliceIntoPosition(1, '*/5');
+        $days = is_array($days) ? $days : func_get_args();
+
+        return $this->spliceIntoPosition(6, implode(',', $days));
     }
 
     /**
-     * 每几秒执行
+     * Splice the given value into the given position of the expression.
      *
+     * @param int $position
+     * @param string $value
      * @return $this
      */
-    public function everyNumSecond($second)
+    protected function spliceIntoPosition($position, $value)
     {
-        return $this->spliceIntoPosition(1, '*/' . $second);
-    }
+        $segments = preg_split("/\s+/", $this->expression);
 
-    /**
-     * 每分钟执行
-     *
-     * @return $this
-     */
-    public function everyMinute()
-    {
-        return $this->spliceIntoPosition(2, '*');
-    }
+        $segments[$position - 1] = $value;
 
-    /**
-     * 每5分钟执行
-     *
-     * @return $this
-     */
-    public function everyFiveMinutes()
-    {
-        return $this->spliceIntoPosition(2, '*/5');
-    }
-
-    /**
-     * 每10分钟执行
-     *
-     * @return $this
-     */
-    public function everyTenMinutes()
-    {
-        return $this->spliceIntoPosition(2, '*/10');
-    }
-
-    /**
-     * 每30分钟执行
-     *
-     * @return $this
-     */
-    public function everyThirtyMinutes()
-    {
-        return $this->spliceIntoPosition(2, '0,30');
-    }
-
-    /**
-     * 设置时区
-     *
-     * @param string $timezone
-     * @return $this
-     */
-    public function timezone($timezone)
-    {
-        $this->timezone = $timezone;
-
-        return $this;
+        return $this->cron(implode(' ', $segments));
     }
 }

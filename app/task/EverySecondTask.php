@@ -29,8 +29,7 @@ class EverySecondTask implements TaskInterface
 
     public function __construct(CrontabFrequencies $frequencies)
     {
-        $frequencies->everyTenMinutes(2);
-        $this->rule = $frequencies->getRule();
+        $this->rule = $frequencies->everySecond()->getExpression();
     }
 
     /**
