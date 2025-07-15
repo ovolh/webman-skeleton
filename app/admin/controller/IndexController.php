@@ -9,6 +9,8 @@ class IndexController
     public function index(Request $request): \support\Response
     {
         return success([]);
+
+
     }
 
 }
